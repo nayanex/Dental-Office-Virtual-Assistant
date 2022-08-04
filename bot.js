@@ -17,7 +17,7 @@ class DentaBot extends ActivityHandler {
         this.QnAMaker = new QnAMaker(configuration.QnAConfiguration, qnaOptions);
        
         // create a DentistScheduler connector
-        this.dentistScheduler = new DentistScheduler(configuration)
+        this.dentistScheduler = new DentistScheduler(configuration.SchedulerConfiguration)
       
         // create a IntentRecognizer connector
         this.intentRecognizer = new IntentRecognizer(configuration.LuisConfiguration);
@@ -64,7 +64,6 @@ class DentaBot extends ActivityHandler {
                 await context.sendActivity(`I'm not sure I found an answer to your question`);
             }
 
-             
             await next();
     });
 
