@@ -4,10 +4,7 @@ class DentistScheduler {
             const response = await fetch(configuration.SchedulerEndpoint + "availability")
             const times = await response.json()
             let responseText = `Current time slots available: `
-            times.map(time => {
-                responseText += `
-${time}`
-            })
+            times.map(time => {responseText += `${time}`})
             return responseText
         }
 
