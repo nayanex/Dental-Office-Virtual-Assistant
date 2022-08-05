@@ -14,7 +14,7 @@ class DentaBot extends ActivityHandler {
         if (!configuration) throw new Error('[QnaMakerBot]: Missing parameter. configuration is required');
 
         // create a QnAMaker connector
-        this.QnAMaker = new QnAMaker(configuration.QnAConfiguration, qnaOptions);
+        this.qnaMaker = new QnAMaker(configuration.QnAConfiguration, qnaOptions);
        
         // create a DentistScheduler connector
         this.dentistScheduler = new DentistScheduler(configuration.SchedulerConfiguration)
@@ -48,14 +48,14 @@ class DentaBot extends ActivityHandler {
             ) {
                 const date_time = LuisResult.entities.$instance.date_time[0].text;
                 // call api with location entity info
-                const getDateTimeOfAppointment = this.dentistScheduler.scheduleAppointment(date_time);
+                const getDateTimeOfAppointment = await this.dentistScheduler.scheduleAppointment(date_time);
                 console.log(getDateTimeOfAppointment)
                 await context.sendActivity(getDateTimeOfAppointment);
                 await next();
                 return;
             }
             // If an answer was received from QnA Maker, send the answer back to the user.
-            else if (qnaResults[0]) {
+            else if (qnaResults[0].score > .5) {
                 console.log(qnaResults[0])
                 await context.sendActivity(`${qnaResults[0].answer}`);
             }
