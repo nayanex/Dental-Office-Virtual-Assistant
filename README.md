@@ -28,7 +28,14 @@ Give an example here
 
 ## Testing
 
-Explain the steps needed to run any automated tests
+Go to the following URL where the static website is deployed and the web chat is embedded
+
+https://green-moss-0cea28603.1.azurestaticapps.net/
+
+Ask questions like:
+
+- can i make an appointment at 8 am ?
+- What if i don't have health insurance?
 
 ### Break Down Tests
 
